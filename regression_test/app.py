@@ -1,13 +1,9 @@
 
 import streamlit as st
 import numpy as np
-import seaborn as sns
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import joblib
+import io
 
 def add_bg_from_url():
     st.markdown(
@@ -28,27 +24,40 @@ add_bg_from_url()
 
 def main():
     st.text("Multi Linear Regression")
-    # slider
-    
-    uploaded_file = st.file_uploader("Choose a file")
 
-    if uploaded_file is not None:
-        
+    file = st.file_uploader("Carica un file CSV o Excel", type=["csv", "xlsx"])
+    
+    if file is not None:
         df = pd.read_csv(file) if file.type == "application/vnd.ms-excel" else pd.read_excel(file)
-        #inference
-        st.write("Try the model")
-        st.write(df)
 
-        input1 = st.number_input("Insert R&D value:",)
-        input2 = st.number_input("Insert Administration value:",)
-        input3 = st.number_input("Insert Marketing Spend value:",)
-
-        newmodel = joblib.load('regression_test.pkl')
-        prediction = newmodel.predict([[input1, input2, input3]])[0]
-        df["Predicted Profit"] = np.round(prediction,1)
-        st.write(f"Predicted profit: {round(prediction,1)}$")    
+        # Mostra i dati caricati
+        st.write("Dati caricati:")
         st.write(df)
     
+        #predictions = newmodel.predict(df[['R&D Spend', 'Administration', 'Marketing Spend']])
+        #df['Predicted Profit'] = np.round(predictions, 1)
+        #st.write(df)
+    
+        #download button
+        output = io.BytesIO()
+        writer = pd.ExcelWriter(output, engine='xlsxwriter')
+        df.to_excel(writer,sheet_name='Elenco_tot', index=False)
+        writer.save()
+        output.seek(0)
+        st.download_button(
+        label="Scarica file Excel",
+        data=output,
+        file_name='Profit_prediction.xlsx',
+        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+        
+    input1 = st.number_input("Insert R&D value:",)
+    input2 = st.number_input("Insert Administration value:",)
+    input3 = st.number_input("Insert Marketing Spend value:",)
+
+    newmodel = joblib.load('regression_test.pkl')
+    prediction = newmodel.predict([[input1, input2, input3]])[0]
+    st.write(f"Predicted profit: {round(prediction,1)}$")  
 if __name__ == "__main__":
     main()
 
