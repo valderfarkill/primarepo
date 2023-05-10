@@ -1,9 +1,9 @@
+XlsxWriter
+pandas==1.5
 streamlit
-pandas
 numpy
-matplotlib
-xlsxwriter
-scikit-learn
 seaborn
-io
+matplotlib
+plotly
+scikit-learn
 openpyxl
