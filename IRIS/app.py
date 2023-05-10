@@ -53,7 +53,7 @@ def main():
         file_name='regr_iris.xlsx',
         mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
-    newmodel = joblib.load('regression_iris.pkl')
+    newmodel = joblib.load(full_path)
 
     sepal_lenght = st.number_input("sepal length", 1.0,10.0,3.0)
     sepal_width = st.number_input("sepal width", 1.0,10.0,3.0)
