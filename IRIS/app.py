@@ -19,7 +19,7 @@ def add_bg_from_url():
          unsafe_allow_html=True
      )
 
-add_bg_from_url() 
+
 
 def main():
     st.text("Iris Classification")
@@ -59,8 +59,9 @@ def main():
     st.write(f"Classification iris: {prediction}")
     
 
-
+    
 if __name__ == "__main__":
+    add_bg_from_url() 
     main()
 
 #streamlit run app.py
