@@ -5,6 +5,9 @@ import joblib
 import io
 import os
 
+import warnings
+warnings.filterwarnings('ignore')
+
 def add_bg_from_url():
     st.markdown(
          f"""
