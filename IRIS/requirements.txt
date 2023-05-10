@@ -1,9 +1,7 @@
-pandas==1.5
 streamlit
+pandas==1.5
+scikit-learn
+xlsxwriter
 numpy
 matplotlib
-xlsxwriter
-scikit-learn
-seaborn
 openpyxl
-joblib
