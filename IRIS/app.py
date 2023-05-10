@@ -24,7 +24,7 @@ def add_bg_from_url():
 def main():
     st.text("Iris Classification")
 
-    absolute_path = os.path.dirname(_file_)
+    absolute_path = os.path.dirname(__file__)
     relative_path = "regression_iris.pkl"
     full_path = os.path.join(absolute_path, relative_path)
 
