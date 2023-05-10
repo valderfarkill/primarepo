@@ -1,10 +1,9 @@
+pandas==1.5
 streamlit
-pandas
 numpy
 matplotlib
 xlsxwriter
 scikit-learn
 seaborn
 openpyxl
-io
 joblib
